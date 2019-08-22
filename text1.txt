@@ -22,6 +22,19 @@
   2.2实现步骤：
      2.2.1创建架构标准module
      2.2.2plugin modlue 与主module 实现此依赖此标准	 
+
+
+3.plugin插件中如何进行界面跳转
+ 思考：
+    startActivity(new Intent(that,SceondActivity.class));
+	这样做是肯定不行的，因为这个SceondActivity 在apk中根本没有安装，没有安装就意味着，这个activity没有被系统注入上下文（这里偏源码一点）
+	因此，肯定也是没有被系统注册过，因此这么搞肯定是不行的
+ 方案：重写startActivity
+ 
+ 思路：
+ 桩1（加载plugin的主界面）-------------->桩2（加载plugin的第二界面）	 
+4.怎样接入别的apk呢（动态替换）	 
+	 
 ======================================================================
 我的问题：
 1.如何理解插桩式控制
@@ -46,6 +59,10 @@
 因此只有遍历出来那个是launcher了才能加载，否则会加载失败
 3.插件化开发在AccompatActivity的them兼容性问题，如何处理？
 答：规避方案1：换成activity 
+4.插件化的界面跳转理解：
+实际上这是一个主activity跳转到桩activity的操作，桩activity中得到classLoader并得到 apk中的一个activity信息而已，并且展示出来，
+万万要注意，这里并非apk融合
+
 
 我的总结：
 1.插件化的场景：我认为插件化所负责是另一领域的apk，来接到这个宿主apk这个大板子上，而

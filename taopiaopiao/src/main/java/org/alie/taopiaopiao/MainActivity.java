@@ -1,5 +1,6 @@
 package org.alie.taopiaopiao;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
@@ -18,6 +19,7 @@ public class MainActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
                 Toast.makeText(that,"插件apk界面点击",Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(that, SecondActivity.class));
             }
         });
     }

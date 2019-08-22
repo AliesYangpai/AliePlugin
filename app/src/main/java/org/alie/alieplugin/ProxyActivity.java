@@ -1,6 +1,7 @@
 package org.alie.alieplugin;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.content.res.Resources;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -93,6 +94,14 @@ public class ProxyActivity extends Activity {
     protected void onStart() {
         super.onStart();
         payInterfaceActivity.onStart();
+    }
+
+    @Override
+    public void startActivity(Intent intent) {
+        String className1=intent.getStringExtra("className");
+        Intent intent1 = new Intent(this, ProxyActivity.class);
+        intent1.putExtra("className", className1);
+        super.startActivity(intent1);
     }
 
     @Override
