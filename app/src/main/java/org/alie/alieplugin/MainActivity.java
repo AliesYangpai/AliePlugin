@@ -54,7 +54,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
                  */
                 String className = "";
                 ActivityInfo[] activities = PluginManager.getInstance().getPackageInfo().activities;
-                className = activities[1].name;
+                className = activities[0].name;
                 intent.putExtra("className", className);
                 startActivity(intent);
                 break;
@@ -69,7 +69,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
      */
     private void loadPlugin() {
         File filesDir = this.getDir("testplugin", Context.MODE_PRIVATE);
-        String name = "pluginb.apk";
+        String name = "taopiaopiao-debug.apk";
         String filePath = new File(filesDir, name).getAbsolutePath();
         File file = new File(filePath);
         if (file.exists()) {

@@ -52,7 +52,7 @@ public class PluginManager {
      */
     public void loadPath(Context context){
         File filesDir = context.getDir("testplugin", Context.MODE_PRIVATE);
-        String name = "pluginb.apk";
+        String name = "taopiaopiao-debug.apk";
         String filePath = new File(filesDir, name).getAbsolutePath();
 
 
