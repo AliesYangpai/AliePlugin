@@ -39,6 +39,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
             case R.id.iv:
                 Toast.makeText(that,"插件apk界面点击",Toast.LENGTH_SHORT).show();
                 startActivity(new Intent(that, SecondActivity.class));
+                startService(new Intent(that,PluginService.class));
                 break;
         }
     }

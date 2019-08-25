@@ -62,6 +62,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
     }
 
 
+
     /**
      * 将sd卡中的插件apk copy到私有目录
      * 注意，本身这插件apk是要在 管理台配置好的，但是此处我们就直接加载sd卡中的插件即可

@@ -1,6 +1,7 @@
 package org.alie.alieplugin;
 
 import android.app.Activity;
+import android.content.ComponentName;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.support.v7.app.AppCompatActivity;
@@ -103,6 +104,16 @@ public class ProxyActivity extends Activity {
         intent1.putExtra("className", className1);
         super.startActivity(intent1);
     }
+
+    @Override
+    public ComponentName startService(Intent service) {
+        String serviceName = service.getStringExtra("serviceName");
+        Intent intent = new Intent(this, ProxyService.class);
+        intent.putExtra("serviceName", serviceName);
+        return super.startService(intent);
+    }
+
+
 
     @Override
     protected void onDestroy() {

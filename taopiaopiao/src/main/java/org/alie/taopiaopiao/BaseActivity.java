@@ -42,7 +42,6 @@ public class BaseActivity extends Activity implements PayInterfaceActivity {
     }
 
 
-
     @Override
     public View findViewById(int id) {
         return that.findViewById(id);
@@ -68,6 +67,13 @@ public class BaseActivity extends Activity implements PayInterfaceActivity {
         Intent m = new Intent();
         m.putExtra("className", intent.getComponent().getClassName());
         that.startActivity(m);
+    }
+
+    @Override
+    public ComponentName startService(Intent service) {
+        Intent m = new Intent();
+        m.putExtra("serviceName", service.getComponent().getClassName());
+        return that.startService(m);
     }
 
     @NonNull
