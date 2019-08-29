@@ -1,8 +1,10 @@
 package org.alie.taopiaopiao;
 
 import android.app.Activity;
+import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.pm.ApplicationInfo;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -61,6 +63,11 @@ public class BaseActivity extends Activity implements PayInterfaceActivity {
     }
 
 
+    /**
+     * 重写startActivity，使用宿主的context
+     *
+     * @param intent
+     */
     @Override
     public void startActivity(Intent intent) {
 //        ProxyActivity --->className
@@ -69,11 +76,40 @@ public class BaseActivity extends Activity implements PayInterfaceActivity {
         that.startActivity(m);
     }
 
+    /**
+     * 重写startService，使用宿主的Context
+     *
+     * @param service
+     * @return
+     */
     @Override
     public ComponentName startService(Intent service) {
         Intent m = new Intent();
         m.putExtra("serviceName", service.getComponent().getClassName());
         return that.startService(m);
+    }
+
+    /**
+     * 重写registerReceiver，使用宿主的context
+     *
+     * @param receiver
+     * @param filter
+     * @return
+     */
+    @Override
+    public Intent registerReceiver(BroadcastReceiver receiver, IntentFilter filter) {
+        return that.registerReceiver(receiver, filter);
+    }
+
+    /**
+     * 重写sendBroadcast，使用宿主的context
+     *
+     * @param intent
+     * @return
+     */
+    @Override
+    public void sendBroadcast(Intent intent) {
+        that.sendBroadcast(intent);
     }
 
     @NonNull

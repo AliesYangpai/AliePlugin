@@ -1,8 +1,10 @@
 package org.alie.alieplugin;
 
 import android.app.Activity;
+import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.res.Resources;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -113,7 +115,14 @@ public class ProxyActivity extends Activity {
         return super.startService(intent);
     }
 
-
+    @Override
+    public Intent registerReceiver(BroadcastReceiver receiver, IntentFilter filter) {
+        IntentFilter newIntentFilter = new IntentFilter();
+        for (int i = 0; i < filter.countActions(); i++) {
+            newIntentFilter.addAction(filter.getAction(i));
+        }
+        return super.registerReceiver(new ProxyBroadcastReceiver(receiver.getClass().getName(),this), newIntentFilter);
+    }
 
     @Override
     protected void onDestroy() {
