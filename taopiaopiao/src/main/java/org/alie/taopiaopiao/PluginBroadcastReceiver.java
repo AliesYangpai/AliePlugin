@@ -22,6 +22,6 @@ public class PluginBroadcastReceiver extends BroadcastReceiver implements PayInt
 
     @Override
     public void onReceive(Context context, Intent intent) {
-        Toast.makeText(context,"----收到来自主module的广播----",Toast.LENGTH_SHORT).show();
+        Toast.makeText(context,"----收到来Plugin的广播----",Toast.LENGTH_SHORT).show();
     }
 }

@@ -21,10 +21,16 @@
             </intent-filter>
         </activity>
         <activity android:name=".SecondActivity" />
+
         <service
             android:name=".PluginService"
             android:enabled="true"
-            android:exported="true"></service>
+            android:exported="true" />
+        <receiver android:name=".PluginStaticBroadcastReceiver">
+            <intent-filter>
+                <action android:name="org.alie.alieplugin.MainActivity" />
+            </intent-filter>
+        </receiver>
     </application>
 
 </manifest>

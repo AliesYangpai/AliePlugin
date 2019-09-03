@@ -1,8 +1,10 @@
 package org.alie.alieplugin;
 
 import android.app.Activity;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.pm.ActivityInfo;
 import android.os.Environment;
 import android.os.Bundle;
@@ -20,24 +22,37 @@ import java.io.InputStream;
 import static android.content.ContentValues.TAG;
 
 public class MainActivity extends Activity implements View.OnClickListener {
-    private Button btn1, btn2;
-
+    private Button btn1, btn2,btn3;
+    static final String ACTION = "org.alie.taopiaopiao.PLUGIN_ACTION";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         initView();
         initListener();
+        initShakeHandsBroadcastReceiver();
     }
 
     private void initView() {
         btn1 = findViewById(R.id.btn1);
         btn2 = findViewById(R.id.btn2);
+        btn3 = findViewById(R.id.btn3);
     }
 
     private void initListener() {
         btn1.setOnClickListener(this);
         btn2.setOnClickListener(this);
+        btn3.setOnClickListener(this);
+    }
+
+    private void initShakeHandsBroadcastReceiver(){
+        BroadcastReceiver mReceiver = new BroadcastReceiver() {
+            @Override
+            public void onReceive(Context context, Intent intent) {
+                Toast.makeText(context, " 我是宿主，收到你的消息,握手完成!", Toast.LENGTH_SHORT).show();
+            }
+        };
+        registerReceiver(mReceiver, new IntentFilter(ACTION));
     }
 
     @Override
@@ -58,9 +73,11 @@ public class MainActivity extends Activity implements View.OnClickListener {
                 intent.putExtra("className", className);
                 startActivity(intent);
                 break;
+            case R.id.btn3:
+                sendBroadCastToPlugin();
+                break;
         }
     }
-
 
 
     /**
@@ -104,5 +121,13 @@ public class MainActivity extends Activity implements View.OnClickListener {
                 e.printStackTrace();
             }
         }
+    }
+
+
+    public void sendBroadCastToPlugin() {
+        Toast.makeText(getApplicationContext(), "我是宿主  插件插件!收到请回答!!  1", Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent();
+        intent.setAction("org.alie.alieplugin.MainActivity");
+        sendBroadcast(intent);
     }
 }
